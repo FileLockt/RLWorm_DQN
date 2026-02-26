@@ -22,13 +22,11 @@ class DQNworm:
         self.historyy = []
         self.historyx = []
         self.End = False
-        #facing downwards at base.
-    
+
     def death(self):
         self.End = True
 
     def moving(self, input):
-        # Compute intended next head position first, then check bounds and collisions
         nx, ny = self.pointx, self.pointy
         if input == "u":
             self.facing = "north"
@@ -42,22 +40,16 @@ class DQNworm:
         elif input == "r":
             self.facing = "east"
             nx, ny = self.pointx + 1, self.pointy
-
-        # Check bounds before indexing the grid to avoid IndexError and negative-wrap
         if nx < 0 or nx >= GRIDSIZE or ny < 0 or ny >= GRIDSIZE:
             self.death()
             return
 
-        # Check for self-collision on the target cell
         if VirtualPlace[ny][nx] == 1:
             self.death()
             return
 
-        # commit move
         self.pointx, self.pointy = nx, ny
     def drawing(self):
-        #The display will be on a web application. Only code for value change 0 to 1
-        #move the head first, then rest will be tracing the parts
         self.historyx.append(self.pointx)
         self.historyy.append(self.pointy)
 
@@ -69,12 +61,10 @@ class DQNworm:
             VirtualPlace[hy][hx] = 1
 
         VirtualPlace[self.pointy][self.pointx] = 3
-        # clear the tail cell if history is longer than length
         if hist_len > self.length:
             tail_i = hist_len - self.length - 1
             tx = self.historyx[tail_i]
             ty = self.historyy[tail_i]
-            # extra safety: only clear if indices valid
             if 0 <= tx < GRIDSIZE and 0 <= ty < GRIDSIZE:
                 VirtualPlace[ty][tx] = 0
 
