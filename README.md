@@ -1,2 +1,51 @@
-# RLWorm_DQN
-DQN applied on snake game
+# Building Action Agent with Reinforcement Learning
+
+Hello. This probably is going to be my biggest project ever.
+DQN is applied based on modifying PyTorch DQN example code.
+Displayed for my school club.
+
+Post script) it says that classical DQN 
+is not suitable for this kind of dynamic system. which is
+hugely chaotic for it to handle. For informations about DQN, please check other online sources.
+
+This was once posted on 2025 Aug to Oct, but i deleted it for some reasons and this is re-uploaded version.
+
+## 1. Utilization
+
+In order to use, run app.py and run it on your local host.
+For your control, you will use W-A-S-D keys.
+If your keyboard was switched to another language, it wouldn't work.
+For example, if your keyboard is set to be Korean, resulting 'WASD' to be 'ㅈㅁㄴㅇ',
+it wouldn't be able to read your controls.
+Also, in order to use the DQN, you must pre-calculate the .pth file so that it could run without additional process.
+
+For the restart, you have to first terminate the ongoing process of the local host. Then you should re-run the app.py
+in order to start again. If you will, please add reset button within JS.
+
+---
+## 2. Structure
+**A2.py**: is a DQN model. For the current settings, it has 2 hidden layers with 128 neurons size. Using Adam for optimizing. For training, it performs 200k episodes which takes 200 steps each.
+For current code, it has a kind of reward system and system which removes 10 steps after eating food at every episodes. Finally, the uploaded policy weights map will be the one calculated without that logic.
+1. **Loss Function**: Mean Absolute Error function (L1loss)
+2. **Gradient Descent**: Adam
+3. **Memory Buffer**: 1 mil
+4. **Neural Networks**: (If not modified) contains 4 layers. Input layer as n.observations which is 400, 2 hidden layers with each 128 neurons, and output layer with n.actions which is 4. Consisting one with 68356 parameters.
+
+**Module.py**: if you checked the file histories, you'll know that suddenly the head is changed to 3. This is because not only you cannot tell whether the part is head or tail, but also I found out that DQN cannot also be able to tell which is head to tail since it all defined worm as 1. Also, since the original logic of body collison made error of "List out of index" and other sorts of reasons, the logic on here changed little bit too.
+
+**On file histories**: for now, the file change history is set to 123, but i accidentally once blew the whole repository away. So, this is actually more longer than that.
+
+---
+
+
+## 3. Comments
+**1.** The movement of AI will be following after your move. Which is live-action.
+
+**2.** The game will start as soon as you start giving the application a input.
+
+---
+
+## 4. Gallery
+
+
+---
